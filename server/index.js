@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 //////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/auth/login', (req, res) => {
+  console.log('received request in /auth/login')
   var scope = "streaming \
                user-read-email \
                user-read-private"
@@ -39,7 +40,7 @@ app.get('/auth/login', (req, res) => {
     response_type: "code",
     client_id: spotify_client_id,
     scope: scope,
-    redirect_uri: "http://localhost:5001/auth/callback",
+    redirect_uri: "http://localhost:3000/auth/callback",
     state: state
   })
 
@@ -56,7 +57,7 @@ app.get('/auth/callback', (req, res) => {
     url: 'https://accounts.spotify.com/api/token',
     form: {
       code: code,
-      redirect_uri: "http://localhost:5001/auth/callback",
+      redirect_uri: "http://localhost:3000/auth/callback",
       grant_type: 'authorization_code'
     },
     headers: {
